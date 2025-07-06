@@ -1,31 +1,40 @@
+# 🌐 Freelancers Palace
+
+**Freelancers Palace** is a futuristic Web3-powered freelance marketplace that blends decentralized trust, AI-powered matching, and secure smart contract escrow payments — all in one platform.
+
 <p align="center">
-  <img src="freelancepalacebot-banner.png" alt="FreelancePalaceBot Banner" />
+  <img src="freelancepalace-banner.png" alt="Freelancers Palace Banner" />
 </p>
 
-# FreelancePalaceBot 🤖🛠️
 
-A smart contract-powered Discord bot for managing ticket-based workflows, support channels, and task coordination within Web3 ecosystems.
+## 🚀 Tagline  
+_“Where futuristic freelancers meet trust, tech & transformation.”_
 
-## 🔧 Features
-- 🎫 Automated ticket creation and closure
-- 🧾 On-chain smart contract linking
-- 🔒 Role-based access
-- 🌐 DAO and freelance integration
-- 📦 Modular: Contracts, Scripts, Cogs, Database
-
-## 📁 Folder Structure
-- `contracts/` – Solidity smart contracts
-- `cogs/` – Discord bot extensions
-- `scripts/` – Automation scripts
-- `test/` – Bot and contract tests
+---
 
 ## 🛠️ Tech Stack
-- Discord.js
-- Node.js
-- Solidity
-- Hardhat
+
+- **Frontend**: Next.js, TailwindCSS, Framer Motion
+- **Backend**: Node.js, Prisma, MongoDB
+- **Smart Contracts**: Solidity, Hardhat
+- **Authentication**: NextAuth.js
+- **Deployment**: Vercel + IPFS (planned)
+- **Extras**: Lucide Icons, animated UI, real-time dashboards
+
+---
+
+## 📦 Key Features
+
+- 🧠 **AI-powered job matching**  
+- 🔐 **FLR escrow smart contracts** for secure payments  
+- 🧾 **Dynamic dashboards** for freelancers and clients  
+- 🪪 **FLR Trust System** — decentralized reputation scoring  
+- 🎨 **Futuristic UI/UX** with glassmorphism & floating elements  
+- 📈 **Real-time updates** and chat per deal
 
 
 
-👑 Designed for **Freelancers Palace** ecosystem.
+
+
+
 

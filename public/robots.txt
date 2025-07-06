@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://freelancerspalace.com
+
+# Sitemaps
+Sitemap: https://freelancerspalace.com/sitemap.xml

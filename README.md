@@ -18,8 +18,8 @@ _“Where futuristic freelancers meet trust, tech & transformation.”_
 - **Backend**: Node.js, Prisma, MongoDB
 - **Smart Contracts**: Solidity, Hardhat
 - **Authentication**: NextAuth.js
-- **Deployment**: Vercel + IPFS (planned)
-- **Extras**: Lucide Icons, animated UI, real-time dashboards
+- **Deployment**: Vercel + IPFS 
+- 
 
 ---
 

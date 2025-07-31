@@ -10,7 +10,7 @@ export default function EscrowCTA() {
       {/* Background Image */}
       <Image
         src="/images/cta-banner.png"
-        alt="Call to Action"
+        alt="Secure your next freelance or client deal using FLR escrow"
         fill
         className="object-cover absolute inset-0 z-0"
         priority
@@ -30,11 +30,11 @@ export default function EscrowCTA() {
           Ready to Secure Your Next Deal?
         </h2>
         <p className="text-lg text-gray-300 mb-6">
-          Start escrow now and earn FLR instantly.
+          Freelancers get paid. Clients stay protected. Start escrow and earn FLR instantly.
         </p>
 
         <Link href="/start-escrow">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
+          <button className="bg-amber-700 hover:bg-amber-800 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
             Start Escrow
           </button>
         </Link>
@@ -42,4 +42,3 @@ export default function EscrowCTA() {
     </section>
   );
 }
-

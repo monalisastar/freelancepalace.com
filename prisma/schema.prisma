@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String?
+  email        String?  @unique
+  image        String?
+  password     String?
+  role         String?
+  status       String   // ✅ This must be present
+  company      String?  // Optional field
+  projectType  String?  // Also optional
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+   resetToken       String?
+  resetTokenExpiry DateTime?
+  accounts       Account[]
+  sessions       Session[]
+
+
+  jobs               Job[]
+  proposals          Proposal[]
+  payments           Payment[]
+  escrowDeals        EscrowDeal[]
+  clientContracts    Contract[] @relation(name: "ClientContracts")
+  freelancerContracts Contract[] @relation(name: "FreelancerContracts")
+  sentMessages       Message[] @relation("SentMessages")
+  receivedMessages   Message[] @relation("ReceivedMessages")
+  EscrowMessages     EscrowMessage[]
+
+  loginToken         String?  @unique
+}
+
+model Job {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  budget      Float
+  category    String
+  deadline    DateTime
+  clientId    String    @db.ObjectId
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  client      User      @relation(fields: [clientId], references: [id])
+  proposals   Proposal[]
+  contracts   Contract[]
+}
+
+model Proposal {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  content      String
+  budget       Float
+  deliveryTime Int
+  status       String   @default("pending")
+  jobId        String   @db.ObjectId
+  freelancerId String   @db.ObjectId
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  job          Job      @relation(fields: [jobId], references: [id])
+  freelancer   User     @relation(fields: [freelancerId], references: [id])
+  contract     Contract?
+}
+
+model Contract {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  jobId        String    @db.ObjectId
+  proposalId   String    @unique @db.ObjectId
+  clientId     String    @db.ObjectId
+  freelancerId String    @db.ObjectId
+  status       String    @default("active")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  job          Job       @relation(fields: [jobId], references: [id])
+  proposal     Proposal  @relation(fields: [proposalId], references: [id])
+  client       User      @relation(name: "ClientContracts", fields: [clientId], references: [id])
+  freelancer   User      @relation(name: "FreelancerContracts", fields: [freelancerId], references: [id])
+  payments     Payment[] // ✅ Add this
+}
+
+model Payment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  amount      Float
+  method      String
+  status      String
+  userId      String   @db.ObjectId
+  contractId  String   @db.ObjectId
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+  contract    Contract @relation(fields: [contractId], references: [id])
+}
+
+model Message {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  content     String
+  senderId    String   @db.ObjectId
+  receiverId  String   @db.ObjectId
+  createdAt   DateTime @default(now())
+
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model EscrowDeal {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @db.ObjectId
+  amount            Float
+  currency          String
+  description       String
+  conditions        String
+  mode              String
+  status            String   @default("pending")
+  createdAt         DateTime @default(now())
+  counterpartyId    String
+  counterpartyLabel String   // ✅ renamed from duplicate 'counterparty'
+  counterpartyEmail String?  // ✅ keep only once
+  counterpartyPhone String?  // ✅ optional if counterparty is email
+  joinToken         String   @unique
+  joinedAt          DateTime?
+
+  user              User     @relation(fields: [userId], references: [id])
+  messages          EscrowMessage[] // ✅ Added reverse relation here ✅
+}
+
+model EscrowMessage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  dealId    String   @db.ObjectId
+  senderId  String   @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+
+  deal      EscrowDeal @relation(fields: [dealId], references: [id])
+  sender    User       @relation(fields: [senderId], references: [id])
+}
+
+model FreelancerApplication {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                String
+  email               String    @unique
+  phone               String
+  country             String
+  timezone            String
+  linkedin            String
+  category            String
+  skillsDetails       String
+  portfolioLinks      String[]
+  certificationLinks  String[]
+  motivation          String
+  status              String    @default("pending")
+  aiSuspicionScore    Int       @default(0)
+  createdAt           DateTime  @default(now())
+}
+model Account {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+}

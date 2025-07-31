@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   ShieldCheck,
@@ -45,22 +44,6 @@ export default function EscrowTrustFeatures() {
         Why Trust FLR Escrow?
       </motion.h2>
 
-      {/* Visual */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-4xl mb-12"
-      >
-        <Image
-          src="/images/feature-icons.png.jpg"
-          alt="Trust Features"
-          width={1200}
-          height={800}
-          className="w-full h-auto rounded-lg shadow-xl"
-        />
-      </motion.div>
-
       {/* Trust Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
         {trustFeatures.map((item, index) => (
@@ -82,4 +65,3 @@ export default function EscrowTrustFeatures() {
     </section>
   );
 }
-

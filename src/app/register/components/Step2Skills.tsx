@@ -67,7 +67,11 @@ export const Step2Skills = ({ onNext }: Props) => {
       <form onSubmit={handleSubmit(onNext)} className="space-y-5">
         <div>
           <label className="block text-sm font-medium">Category</label>
-          <select {...register('category')} onChange={handleCategoryChange} className="input">
+          <select
+            {...register('category')}
+            onChange={handleCategoryChange}
+            className="select select-bordered w-full"
+          >
             <option value="">-- Select --</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
@@ -88,7 +92,7 @@ export const Step2Skills = ({ onNext }: Props) => {
             {...register('skillsDetails')}
             rows={5}
             placeholder="Describe your tools, frameworks, real projects, client types, etc."
-            className="input"
+            className="textarea textarea-bordered w-full"
           />
           {errors.skillsDetails && <p className="text-red-400 text-sm">{errors.skillsDetails.message}</p>}
         </div>
@@ -106,4 +110,3 @@ export const Step2Skills = ({ onNext }: Props) => {
     </motion.div>
   )
 }
-

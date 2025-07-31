@@ -63,28 +63,34 @@ export const Step1BasicInfo = ({ onNext }: Props) => {
       <form onSubmit={handleSubmit(onNext)} className="space-y-5">
         <div>
           <label className="block text-sm font-medium">Full Name</label>
-          <input {...register('name')} className="input" />
+          <input {...register('name')} className="input input-bordered w-full" />
           {errors.name && <p className="text-red-400 text-sm">{errors.name.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium">Email</label>
-          <input {...register('email')} type="email" className="input" />
+          <input {...register('email')} type="email" className="input input-bordered w-full" />
           {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium">Phone Number</label>
-          <input {...register('phone')} className="input" placeholder="+254712345678" />
+          <input
+            {...register('phone')}
+            className="input input-bordered w-full"
+            placeholder="+254712345678"
+          />
           {errors.phone && <p className="text-red-400 text-sm">{errors.phone.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium">Country</label>
-          <select {...register('country')} className="input">
+          <select {...register('country')} className="select select-bordered w-full text-black">
             <option value="">-- Select --</option>
             {countries.map((c) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
           {errors.country && <p className="text-red-400 text-sm">{errors.country.message}</p>}
@@ -92,10 +98,12 @@ export const Step1BasicInfo = ({ onNext }: Props) => {
 
         <div>
           <label className="block text-sm font-medium">Timezone</label>
-          <select {...register('timezone')} className="input">
+          <select {...register('timezone')} className="select select-bordered w-full text-black">
             <option value="">-- Select --</option>
             {timezones.map((t) => (
-              <option key={t} value={t}>{t}</option>
+              <option key={t} value={t}>
+                {t}
+              </option>
             ))}
           </select>
           {errors.timezone && <p className="text-red-400 text-sm">{errors.timezone.message}</p>}

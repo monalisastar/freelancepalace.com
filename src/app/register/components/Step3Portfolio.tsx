@@ -74,7 +74,9 @@ export const Step3Portfolio = ({ onNext }: Props) => {
       className="w-full max-w-xl bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-xl"
     >
       <h2 className="text-2xl font-bold mb-1">Step 3: Portfolio & Certifications</h2>
-      <p className="text-sm text-gray-300 mb-6">We need proof of work and credentials. At least one link per section is required.</p>
+      <p className="text-sm text-gray-300 mb-6">
+        We need proof of work and credentials. At least one link per section is required.
+      </p>
 
       <form onSubmit={handleSubmit(onNext)} className="space-y-6">
         <div>
@@ -85,7 +87,7 @@ export const Step3Portfolio = ({ onNext }: Props) => {
               key={i}
               {...register(`portfolioLinks.${i}`)}
               placeholder="https://github.com/your-project"
-              className="input mb-2"
+              className="input input-bordered w-full mb-2"
             />
           ))}
           {errors.portfolioLinks && (
@@ -101,7 +103,7 @@ export const Step3Portfolio = ({ onNext }: Props) => {
               key={i}
               {...register(`certificationLinks.${i}`)}
               placeholder="https://credly.com/your-cert"
-              className="input mb-2"
+              className="input input-bordered w-full mb-2"
             />
           ))}
           {errors.certificationLinks && (
@@ -122,4 +124,3 @@ export const Step3Portfolio = ({ onNext }: Props) => {
     </motion.div>
   )
 }
-

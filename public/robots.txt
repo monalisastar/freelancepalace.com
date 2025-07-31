@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://freelancerspalace.com
+Host: https://freelancersverse.com
 
 # Sitemaps
-Sitemap: https://freelancerspalace.com/sitemap.xml
+Sitemap: https://freelancersverse.com/sitemap.xml

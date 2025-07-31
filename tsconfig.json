@@ -1,22 +1,11 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-=======
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
->>>>>>> e8366de (Initial commit from Create Next App)
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -25,44 +14,23 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-<<<<<<< HEAD
-    "types": [
-      "next-auth"
-    ],
-=======
->>>>>>> e8366de (Initial commit from Create Next App)
+    "types": ["next-auth"],
     "plugins": [
       {
         "name": "next"
       }
     ],
-<<<<<<< HEAD
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ]
-    },
-    "target": "ES2017"
+      "@/*": ["*"]
+    }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "types"             // ✅ Ensures your custom types are loaded
+    "types"
   ],
-  "exclude": [
-    "node_modules"
-  ]
-}
-
-=======
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
->>>>>>> e8366de (Initial commit from Create Next App)

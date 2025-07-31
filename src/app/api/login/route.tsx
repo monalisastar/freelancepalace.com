@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { encode } from 'next-auth/jwt';
 
 const prisma = new PrismaClient();
 
@@ -21,16 +21,29 @@ export async function POST(req: Request) {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
-
     if (!passwordMatch) {
       return NextResponse.json({ message: 'Invalid credentials.' }, { status: 401 });
     }
 
-    const token = jwt.sign(
-      { id: user.id, role: user.role },
-      process.env.JWT_SECRET!,
-      { expiresIn: '7d' }
-    );
+    // Create a session token in the format NextAuth expects
+    const token = await encode({
+      secret: process.env.NEXTAUTH_SECRET!,
+      token: {
+        id: user.id,
+        email: user.email,
+        name: user.name ?? '',
+        role: user.role ?? '',
+        status: user.status ?? '',
+        picture: user.image ?? '',
+      },
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    // Set cookie name based on environment
+    const cookieName =
+      process.env.NODE_ENV === 'production'
+        ? '__Secure-next-auth.session-token'
+        : 'next-auth.session-token';
 
     const response = NextResponse.json({
       message: 'Login successful',
@@ -43,12 +56,12 @@ export async function POST(req: Request) {
       },
     });
 
-    response.cookies.set('token', token, {
+    response.cookies.set(cookieName, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 7, // 7 days
     });
 
     return response;
@@ -57,4 +70,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Server error.' }, { status: 500 });
   }
 }
-

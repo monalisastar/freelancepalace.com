@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { DollarSign, Users, Coins, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -36,7 +35,6 @@ const stats = [
   },
 ];
 
-// Simple count-up animation
 function useCountUp(target: number, speed = 50) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -68,22 +66,6 @@ export default function EscrowStats() {
         FLR Escrow in Numbers
       </motion.h2>
 
-      {/* Image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-4xl mb-12"
-      >
-        <Image
-          src="/images/escrow-stats.png.jpg"
-          alt="FLR Escrow Stats"
-          width={1200}
-          height={800}
-          className="w-full h-auto rounded-lg shadow-xl"
-        />
-      </motion.div>
-
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
         {stats.map((stat, index) => {
@@ -111,4 +93,3 @@ export default function EscrowStats() {
     </section>
   );
 }
-

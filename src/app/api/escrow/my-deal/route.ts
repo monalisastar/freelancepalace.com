@@ -3,7 +3,7 @@ import { getSession } from '../../../../lib/auth';
 import prisma from '../../../../lib/prisma';
 
 export async function GET(req: Request) {
-  const session = getSession(req as any);
+  const session = await getSession(req as any); // ✅ Await the session properly
 
   if (!session || !session.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -11,7 +11,7 @@ export async function GET(req: Request) {
 
   try {
     const deals = await prisma.escrowDeal.findMany({
-      where: { userId: session.id },
+      where: { userId: session.id }, // ✅ Safe to access after awaiting
       orderBy: { createdAt: 'desc' },
     });
 
@@ -21,4 +21,3 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
 }
-
